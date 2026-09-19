@@ -7,6 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Mono.Debugging.Soft</RootNamespace>
     <AssemblyName>Mono.Debugging.Soft</AssemblyName>
+    <PublicSign>true</PublicSign>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Mono.Debugging\mono.debugging.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -43,6 +44,7 @@
       <Name>Mono.Debugger.Soft</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\nrefactory\ICSharpCode.NRefactory.CSharp\ICSharpCode.NRefactory.CSharp.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayAdaptor.cs" />
@@ -70,18 +72,45 @@
     <NuGetVersionCecil Condition="$(NuGetVersionCecil) == ''">0.10.1</NuGetVersionCecil>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Mono.Cecil" Version="$(NuGetVersionCecil)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(NuGetVersionRoslyn)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="$(NuGetVersionRoslyn)" PrivateAssets="all" />
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>10.0.3</Version>
-    </PackageReference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>$(NuGetPackageRoot)mono.cecil/0.10.1/lib/net40/Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>$(NuGetPackageRoot)microsoft.codeanalysis.common/3.4.0-beta4-final/lib/netstandard2.0/Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp">
+      <HintPath>$(NuGetPackageRoot)microsoft.codeanalysis.csharp/3.4.0-beta4-final/lib/netstandard2.0/Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces">
+      <HintPath>$(NuGetPackageRoot)microsoft.codeanalysis.csharp.workspaces/3.4.0-beta4-final/lib/netstandard2.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces">
+      <HintPath>$(NuGetPackageRoot)microsoft.codeanalysis.visualbasic.workspaces/3.4.0-beta4-final/lib/netstandard2.0/Microsoft.CodeAnalysis.VisualBasic.Workspaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(NuGetPackageRoot)newtonsoft.json/10.0.3/lib/net45/Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Condition=" '$(OS)' == 'Windows_NT' " Include="Mono.Posix-4.5">
+      <HintPath>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Mono\Mono.Posix-4.5.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Condition=" '$(OS)' != 'Windows_NT' " Include="Mono.Posix" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Mono.Posix-4.5" Version="4.5.0" />
+    <Reference Condition=" '$(OS)' != 'Windows_NT' " Include="Mono.Posix">
+      <HintPath>/usr/lib/mono/4.5/Mono.Posix.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>$(NuGetPackageRoot)system.reflection.metadata/1.6.0/lib/netstandard2.0/System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>$(NuGetPackageRoot)system.collections.immutable/1.5.0/lib/netstandard2.0/System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net472/1.0.3/build/.NETFramework/v4.7.2/Facades/netstandard.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="..\Mono.Debugging.settings" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

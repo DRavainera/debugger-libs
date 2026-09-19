@@ -11,6 +11,8 @@
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>mono.snk</AssemblyOriginatorKeyFile>
+    <PublicSign>True</PublicSign>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -121,12 +123,18 @@
   </ItemGroup>
   <PropertyGroup>
     <NuGetVersionCecil Condition="$(NuGetVersionCecil) == ''">0.10.1</NuGetVersionCecil>
+    <NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == '' and '$(OS)' != 'Windows_NT'">$(HOME)/.nuget/packages/</NuGetPackageRoot>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Mono.Cecil" Version="$(NuGetVersionCecil)" PrivateAssets="all" />
+    <Reference Include="Mono.Cecil">
+      <HintPath>$(NuGetPackageRoot)mono.cecil/0.10.1/lib/net40/Mono.Cecil.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="System" />
+    <Reference Include="mscorlib">
+      <HintPath>$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net472/1.0.3/build/.NETFramework/v4.7.2/mscorlib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

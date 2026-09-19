@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Mono.Debugging</RootNamespace>
     <SignAssembly>True</SignAssembly>
+    <PublicSign>true</PublicSign>
     <AssemblyOriginatorKeyFile>mono.debugging.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>Mono.Debugging</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -41,6 +42,17 @@
     <DebugSymbols>true</DebugSymbols>
     <NoWarn>1591;1573</NoWarn>
     <DocumentationFile>bin\Release\Mono.Debugging.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugGnome|Any CPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\DebugGnome</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591;1573</NoWarn>
+    <DocumentationFile>bin\DebugGnome\Mono.Debugging.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -142,10 +154,18 @@
     <Compile Include="Mono.Debugging.Client\DebuggerStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Buffers" Version="4.5.0" />
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>1.5.0</Version>
-    </PackageReference>
+    <Reference Include="System.Buffers">
+      <HintPath>$(NuGetPackageRoot)system.buffers\4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable">
+      <HintPath>$(NuGetPackageRoot)system.collections.immutable\1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net472\1.0.3\build\.NETFramework\v4.7.2\Facades\netstandard.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="..\Mono.Debugging.settings" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
