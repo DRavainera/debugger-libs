@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 
 namespace Mono.Debugger.Soft
@@ -122,9 +121,13 @@ namespace Mono.Debugger.Soft
 			if (!asyncResult.IsCompleted)
 				asyncResult.AsyncWaitHandle.WaitOne ();
 
+#if !NET
 			AsyncResult result = (AsyncResult) asyncResult;
 			LaunchCallback cb = (LaunchCallback) result.AsyncDelegate;
 			return cb.EndInvoke (asyncResult);
+#else
+			throw new PlatformNotSupportedException ();
+#endif
 		}
 
 		public static VirtualMachine Launch (ProcessStartInfo info)
@@ -234,9 +237,13 @@ namespace Mono.Debugger.Soft
 			if (!asyncResult.IsCompleted)
 				asyncResult.AsyncWaitHandle.WaitOne ();
 
+#if !NET
 			AsyncResult result = (AsyncResult) asyncResult;
 			ListenCallback cb = (ListenCallback) result.AsyncDelegate;
 			return cb.EndInvoke (asyncResult);
+#else
+			throw new PlatformNotSupportedException ();
+#endif
 		}
 
 		public static VirtualMachine Listen (IPEndPoint dbg_ep)
@@ -317,9 +324,13 @@ namespace Mono.Debugger.Soft
 			if (!asyncResult.IsCompleted)
 				asyncResult.AsyncWaitHandle.WaitOne ();
 
+#if !NET
 			AsyncResult result = (AsyncResult) asyncResult;
 			ConnectCallback cb = (ConnectCallback) result.AsyncDelegate;
 			return cb.EndInvoke (asyncResult);
+#else
+			throw new PlatformNotSupportedException ();
+#endif
 		}
 
 		public static void CancelConnection (IAsyncResult asyncResult)

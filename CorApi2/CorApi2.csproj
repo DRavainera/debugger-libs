@@ -1,46 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{69136056-BFD3-4CEC-BB41-D9991C79593C}</ProjectGuid>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CorApi2</RootNamespace>
     <AssemblyName>CorApi2</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Mono.Debugging\mono.debugging.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;MDBG_FEATURE_INTEROP,MDBGENG_FEATURE_TRACECALLS,MDBGENG_FEATURE_CAPTUREOUTPUT,CORAPI_EXPOSE_RAW_INTERFACES</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
+    <PublicSign>True</PublicSign>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>SYSLIB0004;SYSLIB0051;CA1416</NoWarn>
+    <LangVersion>7.3</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;MDBG_FEATURE_INTEROP,MDBGENG_FEATURE_TRACECALLS,MDBGENG_FEATURE_CAPTUREOUTPUT,CORAPI_EXPOSE_RAW_INTERFACES</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>MDBG_FEATURE_INTEROP;MDBGENG_FEATURE_TRACECALLS;MDBGENG_FEATURE_CAPTUREOUTPUT;CORAPI_EXPOSE_RAW_INTERFACES</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
+  <Import Project="..\Mono.Debugging.settings" />
   <ItemGroup>
     <ProjectReference Include="..\CorApi\CorApi.csproj">
       <Project>{9FBCC262-10DC-4E84-A5C4-17230BBF8862}</Project>
@@ -117,13 +97,4 @@
     <Compile Include="Extensions\ProcessExtensions.cs" />
     <Compile Include="Extensions\DebuggerExtensions.cs" />
   </ItemGroup>
-  <Import Project="..\Mono.Debugging.settings" />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

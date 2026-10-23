@@ -810,8 +810,10 @@ namespace Mono.Debugging.Client
 
 		~ObjectValue ()
 		{
+#if !NET
 			if (updateCallback != null)
 				System.Runtime.Remoting.RemotingServices.Disconnect ((UpdateCallbackProxy)updateCallback.Callback);
+#endif
 		}
 		
 		internal static void ConnectCallbacks (StackFrame parentFrame, params ObjectValue[] values)
