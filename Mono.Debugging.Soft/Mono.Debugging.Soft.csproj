@@ -55,9 +55,10 @@
     <Reference Include="System.Collections.Immutable">
       <HintPath>$(NuGetPackageRoot)system.collections.immutable/1.5.0/lib/netstandard2.0/System.Collections.Immutable.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Posix" Condition=" '$(OS)' != 'Windows_NT' ">
-      <HintPath>$(MonoFrameworkNet45Directory)/Mono.Posix.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\..\src\compat\MonoUnixCompat\MonoUnixCompat.csproj">
+      <Project>{29A8AC1A-5ECB-4928-8BF9-2E6F0512BB17}</Project>
+      <Name>MonoUnixCompat</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayAdaptor.cs" />
